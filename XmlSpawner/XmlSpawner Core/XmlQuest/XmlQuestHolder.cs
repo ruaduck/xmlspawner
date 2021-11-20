@@ -371,7 +371,7 @@ namespace Server.Items
 			// add the reward item back into the container list for display
 			UnHideRewards();
 
-			to.Send(new ContainerDisplay(this));
+			to.Send(new ContainerDisplay(this,9));
 
 #if(CLIENT6017)
             // add support for new client container packets
@@ -379,7 +379,7 @@ namespace Server.Items
 				to.Send(new ContainerContent6017(to, this));
 			else
 #endif
-				to.Send(new ContainerContent(to, this));
+				to.Send(new ContainerContent(to, this,false));
 
 			if (ObjectPropertyList.Enabled)
 			{
@@ -411,7 +411,7 @@ namespace Server.Items
 			}
 		}
 
-		public override bool CheckHold(Mobile m, Item item, bool message, bool checkItems, int plusItems, int plusWeight)
+		public override bool CheckHold(Mobile m, Item item, bool message, bool checkItems, bool checkWeight, int plusItems, int plusWeight)
 		{
 			return false;
 		}

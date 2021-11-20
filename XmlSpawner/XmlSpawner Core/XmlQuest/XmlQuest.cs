@@ -286,12 +286,12 @@ namespace Server.Items
 			//BaseXmlSpawner.ApplyObjectStringProperties(null, action, m_TargetItem, m, m_TargetItem, out status_str);
 
 			TheSpawn.TypeName = action;
-			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, null, null, action);
+			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, null, action);
 			string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
 			if (BaseXmlSpawner.IsTypeOrItemKeyword(typeName))
 			{
-				BaseXmlSpawner.SpawnTypeKeyword(null, TheSpawn, typeName, substitutedtypeName, true, null, from.Location, Map.Internal, out status_str);
+				BaseXmlSpawner.SpawnTypeKeyword(null, TheSpawn, typeName, substitutedtypeName, null, Map.Internal, out status_str);
 			}
 			else
 			{
@@ -308,7 +308,7 @@ namespace Server.Items
 				try
 				{
 					string[] arglist = BaseXmlSpawner.ParseString(substitutedtypeName, 3, "/");
-					object o = XmlSpawner.CreateObject(type, arglist[0], true, true);
+					object o = XmlSpawner.CreateObject(type, arglist[0]);
 
 					if (o == null)
 					{
@@ -416,7 +416,7 @@ namespace Server.Items
 					if (propargs.Length > 1)
 					{
 						// its a prop arg
-						checkprop = BaseXmlSpawner.CheckPropertyString(null, propobj, arglist[i], null, out status_str);
+						checkprop = BaseXmlSpawner.CheckPropertyString(null, propobj, arglist[i], out status_str);
 					}
 					else if (arglist[i] != null && arglist[i].Length > 0 && arglist[i][0] >= '0' && arglist[i][0] <= '9')
 					{
@@ -522,7 +522,7 @@ namespace Server.Items
 						if (quest.PartyRange < 0 || Utility.InRange(m.Location, member.Location, quest.PartyRange))
 						{
 							// find the quest item in their packs
-							Item questitem = BaseXmlSpawner.SearchMobileForItem(member, quest.Name, "IXmlQuest", false);
+							Item questitem = BaseXmlSpawner.SearchMobileForItem(member, quest.Name, "IXmlQuest", false,false);
 
 							if (questitem != null && !questitem.Deleted && questitem is IXmlQuest)
 							{
@@ -755,7 +755,7 @@ namespace Server.Items
 						if (quest.PartyRange < 0 || Utility.InRange(from.Location, member.Location, quest.PartyRange))
 						{
 							// find the quest item in their packs
-							Item questitem = BaseXmlSpawner.SearchMobileForItem(member, quest.Name, "IXmlQuest", false);
+							Item questitem = BaseXmlSpawner.SearchMobileForItem(member, quest.Name, "IXmlQuest", false, false);
 
 							if (questitem != null && !questitem.Deleted && questitem is IXmlQuest)
 							{
@@ -1128,7 +1128,7 @@ namespace Server.Items
 
 			if (arglist.Length > 2)
 			{
-				checkprop = BaseXmlSpawner.CheckPropertyString(null, m_escorted, arglist[2], null, out status_str);
+				checkprop = BaseXmlSpawner.CheckPropertyString(null, m_escorted, arglist[2], out status_str);
 			}
 
 			if (status_str != null) quest.Status = status_str;

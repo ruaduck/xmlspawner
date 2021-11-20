@@ -263,7 +263,7 @@ namespace Server.Items
                         (rt.IsInterface && ContainsInterface(it.GetInterfaces(), rt))))
                         {
                             // check any additional property requirements
-                            if(r.PropertyTests != null && r.PropertyTests[j] != null && !BaseXmlSpawner.CheckPropertyString(null, i, r.PropertyTests[j], null, out status_str))
+                            if(r.PropertyTests != null && r.PropertyTests[j] != null && !BaseXmlSpawner.CheckPropertyString(null, i, r.PropertyTests[j], out status_str))
                             {
                                 // failed to meet the requirement so skip it
                                 continue;

@@ -241,7 +241,7 @@ namespace Server.Engines.XmlSpawner2
 						for (int i = 0; i < list.Count; ++i)
 						{
 
-							XmlAttachment o = (XmlAttachment)XmlSpawner.CreateObject(attachtype, args, false, true, XmlSpawner.ConstructableAccessLevel);
+							XmlAttachment o = (XmlAttachment)XmlSpawner.CreateObject(attachtype, args, true);
 
 							if (o == null)
 							{
@@ -1364,7 +1364,7 @@ namespace Server.Engines.XmlSpawner2
 						if (attachtype != null && attachtype.IsSubclassOf(typeof(XmlAttachment)))
 						{
 
-							o = (XmlAttachment)XmlSpawner.CreateObject(attachtype, args, false, true, XmlSpawner.ConstructableAccessLevel);
+							o = (XmlAttachment)XmlSpawner.CreateObject(attachtype, args, true);
 						}
 
 						if (o != null)
@@ -2375,7 +2375,7 @@ namespace Server.Engines.XmlSpawner2
 			if (from.AccessLevel >= AccessLevel.GameMaster || DateTime.UtcNow >= from.NextActionTime)
 #endif
 			{
-				int value = pvSrc.ReadInt32();
+				var value = pvSrc.ReadInt32();
 
 				if ((value & ~0x7FFFFFFF) != 0)
 				{
@@ -2383,7 +2383,7 @@ namespace Server.Engines.XmlSpawner2
 				}
 				else
 				{
-					Serial s = value;
+					var s = new Serial(value);
 
 					bool blockdefaultonuse = false;
 

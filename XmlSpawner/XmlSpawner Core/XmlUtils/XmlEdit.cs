@@ -537,7 +537,7 @@ namespace Server.Engines.XmlSpawner2
 			AddImageTiled( 50, y , 120, 19, 0x23F4 );
 			AddLabel( 50, y, 0, m_Dialog.ConfigFile );
 
-			if(from.AccessLevel >= XmlSpawner.ConfigAccessLevel)
+			if(from.AccessLevel >= AccessLevel.GameMaster)
 			{
 				// add the save entry
 				AddButton( 185, y , 0xFA8, 0xFAA, 159, GumpButtonType.Reply, 0 );
@@ -1154,7 +1154,7 @@ namespace Server.Engines.XmlSpawner2
 						args[4] = DisplayFrom;
 						args[5] = SaveFilename;
 
-						XmlTextEntryBook book = new XmlTextEntryBook(0, String.Empty, m_Dialog.Name, 20, true, new XmlTextEntryBookCallback(ProcessXmlEditBookEntry), args);
+						XmlTextEntryBook book = new XmlTextEntryBook(0, String.Empty, m_Dialog.Name, 20, true);
 						
 						if(m_Dialog.m_TextEntryBook == null)
 						{
@@ -1166,7 +1166,7 @@ namespace Server.Engines.XmlSpawner2
 						book.Author = Name;
 
 						// fill the contents of the book with the current text entry data
-						book.FillTextEntryBook(text);
+						book.Fill(text);
 
 						// put the book at the location of the player so that it can be opened, but drop it below visible range
 						book.Visible = false;

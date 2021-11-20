@@ -63,7 +63,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                isenemy = BaseXmlSpawner.CheckPropertyString(null, this.AttachedTo, this.Test, from, out status_str);
+                isenemy = BaseXmlSpawner.CheckPropertyString(null, this.AttachedTo, this.Test, out status_str);
             }
 
             return isenemy;

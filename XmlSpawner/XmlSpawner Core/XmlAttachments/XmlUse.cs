@@ -192,7 +192,7 @@ namespace Server.Engines.XmlSpawner2
             Server.Mobiles.XmlSpawner.SpawnObject TheSpawn = new Server.Mobiles.XmlSpawner.SpawnObject(null, 0);
 
             TheSpawn.TypeName = action;
-            string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, target, mob, action);
+            string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, target, action);
             string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
             Point3D loc = new Point3D(0, 0, 0);
@@ -230,7 +230,7 @@ namespace Server.Engines.XmlSpawner2
 
             if (BaseXmlSpawner.IsTypeOrItemKeyword(typeName))
             {
-                BaseXmlSpawner.SpawnTypeKeyword(target, TheSpawn, typeName, substitutedtypeName, true, mob, loc, map, out status_str);
+                BaseXmlSpawner.SpawnTypeKeyword(target, TheSpawn, typeName, substitutedtypeName, mob, map, out status_str);
             }
             else
             {
@@ -289,7 +289,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                return BaseXmlSpawner.CheckPropertyString(null, target, Condition, from, out status_str);
+                return BaseXmlSpawner.CheckPropertyString(null, target, Condition, out status_str);
             }
 
             return true;
@@ -303,7 +303,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                return BaseXmlSpawner.CheckPropertyString(null, target, TargetCondition, from, out status_str);
+                return BaseXmlSpawner.CheckPropertyString(null, target, TargetCondition, out status_str);
             }
 
             return true;

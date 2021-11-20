@@ -154,7 +154,7 @@ namespace Server.Items
         {
             if (to == null) return;
 
-            to.Send(new ContainerDisplay(this));
+            to.Send(new ContainerDisplay(this,9));
             to.Send(new ForcedContainerContent(to, this));
 
             if (ObjectPropertyList.Enabled)

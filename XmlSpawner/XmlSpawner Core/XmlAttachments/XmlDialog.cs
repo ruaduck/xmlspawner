@@ -805,7 +805,7 @@ namespace Server.Engines.XmlSpawner2
 					if (s.Condition != null)
 					{
 						string error;
-						if (!BaseXmlSpawner.CheckPropertyString(null, this, s.Condition, from, out error))
+						if (!BaseXmlSpawner.CheckPropertyString(null, this, s.Condition , out error))
 						{
 							status_str = error;
 							continue;
@@ -950,7 +950,7 @@ namespace Server.Engines.XmlSpawner2
 			Server.Mobiles.XmlSpawner.SpawnObject TheSpawn = new Server.Mobiles.XmlSpawner.SpawnObject(null, 0);
 
 			TheSpawn.TypeName = gumpstring;
-			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, this, mob, gumpstring);
+			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, this, gumpstring);
 			string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
 			Point3D loc = new Point3D(0, 0, 0);
@@ -975,7 +975,7 @@ namespace Server.Engines.XmlSpawner2
 			if (typeName == "GUMP")
 			{
 				string error;
-				BaseXmlSpawner.SpawnTypeKeyword(this, TheSpawn, typeName, substitutedtypeName, true, mob, loc, map, new XmlGumpCallback(DialogGumpCallback), out error, 0);
+				BaseXmlSpawner.SpawnTypeKeyword(this, TheSpawn, typeName, substitutedtypeName, mob, loc, map , out error, 0);
 				// hold processing until the gump response is completed
 				status_str = error;
 				m_HoldProcessing = true;
@@ -997,7 +997,7 @@ namespace Server.Engines.XmlSpawner2
 			Server.Mobiles.XmlSpawner.SpawnObject TheSpawn = new Server.Mobiles.XmlSpawner.SpawnObject(null, 0);
 
 			TheSpawn.TypeName = action;
-			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, this, mob, action);
+			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, this, action);
 			string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
 			Point3D loc = new Point3D(0, 0, 0);
@@ -1022,7 +1022,7 @@ namespace Server.Engines.XmlSpawner2
 			if (BaseXmlSpawner.IsTypeOrItemKeyword(typeName))
 			{
 				string error;
-				BaseXmlSpawner.SpawnTypeKeyword(AttachedTo, TheSpawn, typeName, substitutedtypeName, true, mob, loc, map, out error);
+				BaseXmlSpawner.SpawnTypeKeyword(AttachedTo, TheSpawn, typeName, substitutedtypeName, mob, map, out error);
 				status_str = error;
 			}
 			else
@@ -1236,7 +1236,7 @@ namespace Server.Engines.XmlSpawner2
 			{
 				CurrentEntry = matchentry;
 
-				string text = BaseXmlSpawner.ApplySubstitution(null, this, m, CurrentEntry.Text);
+				string text = BaseXmlSpawner.ApplySubstitution(null, this, CurrentEntry.Text);
 
 				if (text != null)
 				{

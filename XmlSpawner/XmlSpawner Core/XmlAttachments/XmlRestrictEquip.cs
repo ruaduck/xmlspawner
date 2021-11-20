@@ -95,7 +95,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                allowequip = BaseXmlSpawner.CheckPropertyString(null, this.AttachedTo, this.Test, from, out status_str);
+                allowequip = BaseXmlSpawner.CheckPropertyString(null, this.AttachedTo, this.Test, out status_str);
 
                 if (!allowequip && this.FailMsg != null)
                 {

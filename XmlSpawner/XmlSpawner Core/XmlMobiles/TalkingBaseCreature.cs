@@ -662,14 +662,14 @@ namespace Server.Mobiles
 			}
 		}
 
-		[CommandProperty( XmlSpawner.ConfigAccessLevel )]
+		[CommandProperty(AccessLevel.GameMaster)]
 		public bool LoadConfig
 		{
 			get{return false;}
 			set{ if(value == true && DialogAttachment != null) DialogAttachment.DoLoadNPC(null,ConfigFile);}
 		}
 
-		[CommandProperty( XmlSpawner.ConfigAccessLevel )]
+		[CommandProperty(AccessLevel.GameMaster)]
 		public bool SaveConfig
 		{
 			get{return false;}
