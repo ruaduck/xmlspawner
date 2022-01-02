@@ -120,7 +120,7 @@ namespace Server.Engines.XmlSpawner2
             writer.Write(m_RequireLOS);
             writer.Write(m_MaxRange);
             writer.Write(m_Refractory);
-            writer.Write(m_EndTime - DateTime.UtcNow);
+            writer.Write(m_EndTime - DateTime.Now);
             writer.Write(m_MaxUses);
             writer.Write(m_NUses);
             writer.Write(m_BlockDefaultUse);
@@ -156,7 +156,7 @@ namespace Server.Engines.XmlSpawner2
                     m_MaxRange = reader.ReadInt();
                     Refractory = reader.ReadTimeSpan();
                     TimeSpan remaining = reader.ReadTimeSpan();
-                    m_EndTime = DateTime.UtcNow + remaining;
+                    m_EndTime = DateTime.Now + remaining;
                     m_MaxUses = reader.ReadInt();
                     m_NUses = reader.ReadInt();
                     m_BlockDefaultUse = reader.ReadBool();
@@ -192,7 +192,7 @@ namespace Server.Engines.XmlSpawner2
             Server.Mobiles.XmlSpawner.SpawnObject TheSpawn = new Server.Mobiles.XmlSpawner.SpawnObject(null, 0);
 
             TheSpawn.TypeName = action;
-            string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, target, mob, action);
+            string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, target, action);
             string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
             Point3D loc = new Point3D(0, 0, 0);
@@ -230,7 +230,7 @@ namespace Server.Engines.XmlSpawner2
 
             if (BaseXmlSpawner.IsTypeOrItemKeyword(typeName))
             {
-                BaseXmlSpawner.SpawnTypeKeyword(target, TheSpawn, typeName, substitutedtypeName, true, mob, loc, map, out status_str);
+                BaseXmlSpawner.SpawnTypeKeyword(target, TheSpawn, typeName, substitutedtypeName, mob, map, out status_str);
             }
             else
             {
@@ -289,7 +289,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                return BaseXmlSpawner.CheckPropertyString(null, target, Condition, from, out status_str);
+                return BaseXmlSpawner.CheckPropertyString(null, target, Condition, out status_str);
             }
 
             return true;
@@ -303,7 +303,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 string status_str;
 
-                return BaseXmlSpawner.CheckPropertyString(null, target, TargetCondition, from, out status_str);
+                return BaseXmlSpawner.CheckPropertyString(null, target, TargetCondition, out status_str);
             }
 
             return true;
@@ -363,7 +363,7 @@ namespace Server.Engines.XmlSpawner2
             {
                 // is there a refractory limit?
                 // if it is still refractory then return
-                if (Refractory > TimeSpan.Zero && DateTime.UtcNow < m_EndTime) return false;
+                if (Refractory > TimeSpan.Zero && DateTime.Now < m_EndTime) return false;
 
                 return true;
             }
@@ -397,7 +397,7 @@ namespace Server.Engines.XmlSpawner2
                 {
                     m_xa.ExecuteActions(from, targeted, m_xa.SuccessAction);
 
-                    m_xa.m_EndTime = DateTime.UtcNow + m_xa.Refractory;
+                    m_xa.m_EndTime = DateTime.Now + m_xa.Refractory;
                     m_xa.NUses++;
                 }
                 else
@@ -434,7 +434,7 @@ namespace Server.Engines.XmlSpawner2
                     // success
                     ExecuteActions(from, target, SuccessAction);
 
-                    m_EndTime = DateTime.UtcNow + Refractory;
+                    m_EndTime = DateTime.Now + Refractory;
                     NUses++;
                 }
             }

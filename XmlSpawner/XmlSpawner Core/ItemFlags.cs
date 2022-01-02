@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using Server;
 using Server.Targeting;
@@ -7,47 +7,29 @@ using Server.Commands.Generic;
 
 namespace Server.Items
 {
-    public class ItemFlags
+    public partial class ItemFlags
 	{
-        public const int StealableFlag = 0x00200000;
-        public const int TakenFlag = 0x00100000;
+		private const int StealableFlag = 0x00200000;
+		private const int TakenFlag = 0x00100000;
 
-		public static void Initialize()
-		{
-			CommandSystem.Register( "Stealable", AccessLevel.GameMaster, new CommandEventHandler( SetStealable_OnCommand ) );
-			CommandSystem.Register( "Flag", AccessLevel.GameMaster, new CommandEventHandler( GetFlag_OnCommand ) );
-		}
-		
 		public static void SetStealable(Item target, bool value)
 		{
-            if(target != null)
-		        target.SetSavedFlag( StealableFlag, value);
+			target?.SetSavedFlag(StealableFlag, value);
 		}
-		
 		public static bool GetStealable(Item target)
 		{
-		    if(target != null)
-		        return target.GetSavedFlag(StealableFlag);
-		    else
-		        return false;
+			return target != null && target.GetSavedFlag(StealableFlag);
 		}
 
 		public static void SetTaken(Item target, bool value)
 		{
-		    if(target != null)
-		    {
-		        target.SetSavedFlag( TakenFlag, value);
-		    }
+			target?.SetSavedFlag(TakenFlag, value);
 		}
-		
 		public static bool GetTaken(Item target)
 		{
-		    if(target != null)
-		        return target.GetSavedFlag(TakenFlag);
-		    else
-		        return false;
+			return target != null && target.GetSavedFlag(TakenFlag);
 		}
-		
+
 		[Usage( "Flag flagfield" )]
         [Description( "Gets the state of the specified SavedFlag on any item" )]
         public static void GetFlag_OnCommand( CommandEventArgs e )

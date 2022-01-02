@@ -95,7 +95,7 @@ namespace Server.Engines.XmlSpawner2
 			{
 				string status_str;
 
-				if (!BaseXmlSpawner.CheckPropertyString(null, killed, Condition, killer, out status_str))
+				if (!BaseXmlSpawner.CheckPropertyString(null, killed, Condition, out status_str))
 				{
 					return;
 				}
@@ -127,7 +127,7 @@ namespace Server.Engines.XmlSpawner2
 			Server.Mobiles.XmlSpawner.SpawnObject TheSpawn = new Server.Mobiles.XmlSpawner.SpawnObject(null, 0);
 
 			TheSpawn.TypeName = action;
-			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, corpse, killer, action);
+			string substitutedtypeName = BaseXmlSpawner.ApplySubstitution(null, corpse, action);
 			string typeName = BaseXmlSpawner.ParseObjectType(substitutedtypeName);
 
 			Point3D loc = corpse.Location;
@@ -135,7 +135,7 @@ namespace Server.Engines.XmlSpawner2
 
 			if (BaseXmlSpawner.IsTypeOrItemKeyword(typeName))
 			{
-				BaseXmlSpawner.SpawnTypeKeyword(corpse, TheSpawn, typeName, substitutedtypeName, true, killer, loc, map, out status_str);
+				BaseXmlSpawner.SpawnTypeKeyword(corpse, TheSpawn, typeName, substitutedtypeName, killer, map, out status_str);
 			}
 			else
 			{

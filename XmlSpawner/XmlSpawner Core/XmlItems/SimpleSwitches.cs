@@ -717,7 +717,7 @@ namespace Server.Items
 			{
 				// ok, its a test, so test it
 				string status_str;
-				if (BaseXmlSpawner.CheckPropertyString(null, o, property, null, out status_str))
+				if (BaseXmlSpawner.CheckPropertyString(null, o, property, out status_str))
 				{
 					return 1; // true
 				}
