@@ -1636,7 +1636,7 @@ namespace Server.Engines.XmlSpawner2
 			{
 				if(m.Player)
 				{
-					List<XmlAttachment> list = XmlAttach.FindAttachments(m, typeof(XmlPoints));
+					var list = XmlAttach.FindAttachments(m, typeof(XmlPoints));
 					if(list != null && list.Count > 0)
 					{
 						foreach(XmlAttachment x in list)
