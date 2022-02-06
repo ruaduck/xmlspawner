@@ -1,17 +1,3 @@
-In Packets.CS   
-Change
-
-private ContainerDisplay(Container c, short? unk)
-to
-public ContainerDisplay(Container c, short? unk)
-
-private ContainerContent(Mobile beholder, Item beheld, bool gridLocs)
-to
-public ContainerContent(Mobile beholder, Item beheld, bool gridLocs)
-
-private MobileMoving(Mobile m, int noto, int flags)
-to
-public MobileMoving(Mobile m, int noto, int flags)
 
 In BaseCreature.cs
 Add the following code, or delete TalkingDrake.cs

@@ -553,7 +553,7 @@ namespace Server.Mobiles
 
                 foreach (Sector s in sectorList)
                 {
-                    if (s != null && s.Active && s.Players != null && s.Players.Count > 0)
+                    if (s != null && s.Active && s.Players != null)
                     {
 
                         // confirm that players with the proper access level are present
@@ -9360,13 +9360,9 @@ namespace Server.Mobiles
             }
 
             Sector sector = map.GetSector(x, y);
-            List<Item> items = sector.Items;
-            List<Mobile> mobs = sector.Mobiles;
 
-            for (int i = 0; i < items.Count; ++i)
+            for(Item item in sector.Items)
             {
-                Item item = items[i];
-
                 if (item.ItemID < 0x4000 && item.AtWorldPoint(x, y))
                 {
                     ItemData id = item.ItemData;
@@ -9401,10 +9397,8 @@ namespace Server.Mobiles
 
             if (checkMobiles)
             {
-                for (int i = 0; i < mobs.Count; ++i)
+                for(Mobile m in sector.Mobiles)
                 {
-                    Mobile m = mobs[i];
-
                     if (m.Location.X == x && m.Location.Y == y && (m.AccessLevel == AccessLevel.Player || !m.Hidden))
                         if ((m.Z + 16) > z && (z + height) > m.Z)
                             return false;

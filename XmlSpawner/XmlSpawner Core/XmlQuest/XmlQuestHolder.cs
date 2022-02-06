@@ -353,15 +353,13 @@ namespace Server.Items
             // add the reward item back into the container list for display
             UnHideRewards();
 
-			to.Send(new ContainerDisplay(this,null));
-
-                to.Send(new ContainerContent(to, this, true));
-
+            ContainerDisplay.Send(to.NetState, this);
+            ContainerContent.Send(to.NetState, this);
             
-                List<Item> items = this.Items;
+            List<Item> items = this.Items;
 
-                for (int i = 0; i < items.Count; ++i)
-                    to.Send(((Item)items[i]).OPLPacket);
+            for (int i = 0; i < items.Count; ++i)
+                to.Send(((Item)items[i]).OPLPacket);
             
             // move the reward item out of container to protect it from use
             HideRewards();
