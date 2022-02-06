@@ -9361,7 +9361,7 @@ namespace Server.Mobiles
 
             Sector sector = map.GetSector(x, y);
 
-            for(Item item in sector.Items)
+            foreach(Item item in sector.Items)
             {
                 if (item.ItemID < 0x4000 && item.AtWorldPoint(x, y))
                 {
@@ -9397,7 +9397,7 @@ namespace Server.Mobiles
 
             if (checkMobiles)
             {
-                for(Mobile m in sector.Mobiles)
+                foreach(Mobile m in sector.Mobiles)
                 {
                     if (m.Location.X == x && m.Location.Y == y && (m.AccessLevel == AccessLevel.Player || !m.Hidden))
                         if ((m.Z + 16) > z && (z + height) > m.Z)
